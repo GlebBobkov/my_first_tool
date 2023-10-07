@@ -47,6 +47,16 @@ def complement (sequns: str) -> str:
     return ''.join([complement_dict[i] for i in sequns])
 
 
+def reverse_complement (sequns: str) -> str:
+    """
+    That function create reverse complementarity chain for the DNA sequence
+    :param sequns: sequense
+    :return: reversed complimentarity chain to the DNA sequence
+    """
+    rev_sequns = sequns[::-1]
+    return ''.join([complement_dict[i] for i in rev_sequns])
+
+
 def dna_rna_tools (*args):
     *sequnses, def_name = args
     for sequns in sequnses:

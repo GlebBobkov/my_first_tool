@@ -17,6 +17,20 @@ def GC_cont_check(sequence_for_filtering: str , gc_bounds: list) -> bool:
         if GC_calculc <= gc_bounds[1] and GC_calculc >= gc_bounds[0]:
             return True
 
+def lenght_chech (sequence_for_filtering: str, length_bounds: list) -> bool:
+    """
+    Check the lenght of the sequence for filtering
+    :param sequence_for_filtering: analyzed sequence
+    :param length_bounds: list with limitations for lenght
+    :return: bool argument for filtering in fasta_filtering function
+    """
+    if len(length_bounds)==1:
+        if len(sequence_for_filtering) <= length_bounds[0]:
+            return True
+    if len(length_bounds) == 2:
+        if len(sequence_for_filtering) <= length_bounds[1] and len(sequence_for_filtering) >= length_bounds[0]:
+            return True
+
 
 def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = [0, 2**32], quality_threshold = 0):
     outline_new_dict_fasta = {}

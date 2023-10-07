@@ -1,3 +1,11 @@
+ operations = {
+        'length': length_info,
+        'percentage': count_percentage_aa,
+        'pattern': find_pattern,
+        '3Letter_name': rename_three_letter_name,
+        'DNA_code': get_protein_gene
+    }
+
 def protein_tool(*proteins, options=None):
     proteins = list(proteins)
 

@@ -7,6 +7,21 @@ operations = {
     }
 
 
+def compare_pattern(sequence: str, pattern: str) -> bool:
+    """
+    Compare a given pattern to a fragment of sequence of the same length
+    arguments:
+    - sequence (str): sequence fragment to compare with the pattern
+    - pattern (str): pattern for comparison
+    return:
+    - (bool): whether pattern and fragment match
+    """
+    for i in range(0, len(sequence)):
+        if not sequence[i] == pattern[i]:
+            return False
+    return True
+
+
 def find_pattern(sequences: list, pattern: str) -> dict:
     """
     Find all non-overlaping instances of a given pattern in sequences

@@ -21,6 +21,10 @@ complement_dict = {
 }
 
 
+def transcribe(sequns):
+    return ''.join([transcription_dict[i] for i in sequns])
+
+
 def dna_rna_tools (*args):
     *sequnses, def_name = args
     for sequns in sequnses:

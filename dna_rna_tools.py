@@ -38,6 +38,14 @@ def reverse (sequns: str) -> str:
     """
     return sequns[::-1]
 
+def complement (sequns: str) -> str:
+    """
+    That function create a complementarity chain fot the DNA sequence
+    :param sequns: DNA sequense
+    :return: complementarity chain to the DNA sequence
+    """
+    return ''.join([complement_dict[i] for i in sequns])
+
 
 def dna_rna_tools (*args):
     *sequnses, def_name = args

@@ -30,6 +30,15 @@ def transcribe(sequns: str) -> str:
     return ''.join([transcription_dict[i] for i in sequns])
 
 
+def reverse (sequns: str) -> str:
+    """
+    That function reverses DNA sequence
+    :param sequns:DNA sequense 
+    :return: reversed DNA sequence
+    """
+    return sequns[::-1]
+
+
 def dna_rna_tools (*args):
     *sequnses, def_name = args
     for sequns in sequnses:

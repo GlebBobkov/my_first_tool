@@ -6,6 +6,16 @@ operations = {
         'DNA_code': get_protein_gene
     }
 
+
+def get_protein_gene(protein):
+    """
+    Transforming of an amino acid sequence/protein to DNA sequence
+    :param protein: amino acid sequence of protein
+    :return: sequence of protein in the DNA sequence form
+    """
+    return ''.join([retrnaslation_dict[aa] for i in protein])
+
+
 def rename_three_letter_name(seqs: list, sep='') -> list:
     """
     Transform into a three-letter amino acids entry.

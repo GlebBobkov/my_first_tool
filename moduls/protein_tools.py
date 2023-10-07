@@ -7,6 +7,15 @@ coperations = {
     }
 
 
+def length_info (protein: str) -> int:
+    """
+    Сounting the length of an amino acid sequence/protein in the number of amino acids
+    :param protein:  sequence of protein
+    :return: number of amino acids in an amino acid sequence/protein
+    """
+    return len(protein)
+
+
 def count_percentage_aa(seq: str) -> dict:
     """
     Count percentage of each amino acid in sequence

@@ -31,6 +31,21 @@ def lenght_chech (sequence_for_filtering: str, length_bounds: list) -> bool:
         if len(sequence_for_filtering) <= length_bounds[1] and len(sequence_for_filtering) >= length_bounds[0]:
             return True
 
+def quality_chech (quality_of_sequence_for_filterring: str, quality_threshold: int) -> bool:
+    """
+    Check the quality of the sequence for filtering
+    :param quality_of_sequence_for_filterring: 2nd key for the sequense with quality of each nucleotide reading 
+    :param quality_threshold: limitation for the quality of nucleotides reading
+    :return: bool argument for filtering in fasta_filtering function
+    """
+    quality_threshold = str(quality_threshold)
+    Treu_counter = 0
+    for i in quality_of_sequence_for_filterring:
+        if ord(i) >= ord(quality_threshold):
+            Treu_counter += 1
+    if Treu_counter == len(quality_of_sequence_for_filterring):
+        return True
+
 
 def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = [0, 2**32], quality_threshold = 0):
     outline_new_dict_fasta = {}
@@ -43,4 +58,4 @@ def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = [0, 2**32], qual
     outline_new_dict_fasta = {**inline_new_dit_fasta}
     return (outline_new_dict_fasta)
 
-fasta_filtering(seqs)
+

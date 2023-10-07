@@ -21,7 +21,12 @@ complement_dict = {
 }
 
 
-def transcribe(sequns):
+def transcribe(sequns: str) -> str:
+    """
+    That function transcribe DNA to RNA
+    :param sequns: DNA sequence
+    :return: RNA sequence
+    """
     return ''.join([transcription_dict[i] for i in sequns])
 
 

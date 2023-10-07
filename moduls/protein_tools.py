@@ -1,10 +1,30 @@
-operations = {
+coperations = {
         'length': length_info,
         'percentage': count_percentage_aa,
         'pattern': find_pattern,
         '3Letter_name': rename_three_letter_name,
         'DNA_code': get_protein_gene
     }
+
+
+def count_percentage_aa(seq: str) -> dict:
+    """
+    Count percentage of each amino acid in sequence
+    arguments:
+        - seq (str): sequence for counting
+    return:
+        - dict: dictionary with counted percentage
+    """
+    l = count_length(seq)
+    result = {}
+    for aa in seq:
+        if aa not in result:
+            result[aa] = 1
+        else:
+            result[aa] += 1
+    result.update((key, round(value / l * 100, 2)) for key, value in result.items())
+    res = {key: value for key, value in sorted(result.items(), key=lambda item: item[1], reverse=True)}
+    return res
 
 
 def compare_pattern(sequence: str, pattern: str) -> bool:

@@ -7,6 +7,26 @@ operations = {
     }
 
 
+def find_pattern(sequences: list, pattern: str) -> dict:
+    """
+    Find all non-overlaping instances of a given pattern in sequences
+    arguments:
+    - sequences (list): sequences to find the pattern in
+    - pattern (str): pattern in question
+    return
+    - finds(dict): dictionary with sequences as keys and lists of indexes of patterns and the number of patterns as values
+    """
+    finds = {}
+    for j in range(0, len(sequences)):
+        find = []
+        for i in range(0, len(sequences[j])):
+            if compare_pattern(sequences[j][i:i + len(pattern)], pattern):
+                find.append(i)
+                i += len(pattern)
+        finds[sequences[j]] = [len(find)] + find
+    return finds
+
+
 def get_protein_gene(protein):
     """
     Transforming of an amino acid sequence/protein to DNA sequence

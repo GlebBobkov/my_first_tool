@@ -1,3 +1,10 @@
+operations = {
+        'transcribe': transcribe,
+        'reverse': reverse,
+        'complement': complement,
+        'reverse_complement': reverse_complement
+    }
+
 def dna_rna_tools (*args):
     *sequnses, def_name = args
     for sequns in sequnses:

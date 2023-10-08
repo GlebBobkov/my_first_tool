@@ -39,11 +39,11 @@ def quality_chech (quality_of_sequence_for_filterring: str, quality_threshold: i
     :return: bool argument for filtering in fasta_filtering function
     """
     quality_threshold = str(quality_threshold)
-    Treu_counter = 0
+    quality_counter = 0
     for i in quality_of_sequence_for_filterring:
-        if ord(i) >= ord(quality_threshold):
-            Treu_counter += 1
-    if Treu_counter == len(quality_of_sequence_for_filterring):
+        quality_counter += ord(i)
+    quality = quality_counter/len(quality_of_sequence_for_filterring)
+    if quality >= ord(quality_threshold):
         return True
 
 

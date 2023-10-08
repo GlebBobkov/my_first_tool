@@ -47,7 +47,11 @@ def quality_chech (quality_of_sequence_for_filterring: str, quality_threshold: i
         return True
 
 
-def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = [0, 2**32], quality_threshold = 0):
+def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = (0, 2**32), quality_threshold = 0):
+    if type(gc_bounds) != tuple:
+        gc_bounds = (0, gc_bounds)
+    if type(length_bounds) != tuple:
+        length_bounds = (0, length_bounds)
     outline_new_dict_fasta = {}
     inline_new_dit_fasta = {}
     for key, value in seqs.items():

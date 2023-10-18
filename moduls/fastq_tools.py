@@ -84,6 +84,34 @@ def seqs_creation(input_path_input: str) -> dict:
         i +=  4
     return seqs
 
+
+def output_creating (input_path: str, output_filename: str, outline_new_dict_fasta: str):
+    """
+    Create the output file and folder for the file
+    :param input_path: the name of input file for extracting sequenses  
+    :param output_filename:  the name of output file for writing sequenses
+    :param outline_new_dict_fasta: the name of the folder fot the keeping output filename
+    :return: nothing
+    """
+    if output_filename != None:
+        os.makedirs('fastq_filtrator_resuls', exist_ok=True)
+        file_for_output_filename = 'fastq_filtrator_resuls/' + output_filename + '.fastq'
+        with open(file_for_output_filename, mode='w') as f:
+            for key, value in outline_new_dict_fasta.items():
+                f.write(key + '\n')
+                f.write(value[0] + '\n')
+                f.write(value[1] + '\n')
+                f.write(value[2] + '\n')
+    else:
+        os.makedirs('fastq_filtrator_resuls', exist_ok=True)
+        file_for_output_filename = 'fastq_filtrator_resuls/' + input_path
+        with open(file_for_output_filename, mode='w') as f:
+            for key, value in outline_new_dict_fasta.items():
+                f.write(key + '\n')
+                f.write(value[0] + '\n')
+                f.write(value[1] + '\n')
+                f.write(value[2] + '\n')
+
  
 def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = (0, 2**32), quality_threshold = 0):
     if type(gc_bounds) != tuple:

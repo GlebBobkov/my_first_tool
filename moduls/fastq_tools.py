@@ -50,6 +50,41 @@ def quality_chech (quality_of_sequence_for_filterring: str, quality_threshold: i
         return True
 
 
+def seqs_creation(input_path_input: str) -> dict:
+    """
+    Reading of the input file and creating the dictinary of the seqs
+    with structure
+     {name' : ('sequence', 'comment' 'quality')
+     }
+    :param input_path_input:
+    :return: dictinary of esquenses 
+    """
+
+    path_input = str(input_path_input)
+    inline_new_dit_fasta = {}
+    outline_new_dict_fasta = {}
+    py_file = open (path_input)
+    lines = py_file.readlines()
+    i = 0
+    seq = {}
+    seqs = {}
+    while i != (len(lines)):
+        key = lines[i]
+        key = key[:-1]
+        value_1 = lines[i+1]
+        value_1 = value_1 [:-1]
+        value_3 = lines[i+2]
+        value_3 = value_3[:-1]
+        value_2 = lines[i+3]
+        if value_2[-1] == '\n':
+            value_2 = value_2[:-1]
+        value = [value_1, value_3 ,value_2]
+        seq[key] = value
+        seqs = {**seq}
+        i +=  4
+    return seqs
+
+ 
 def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = (0, 2**32), quality_threshold = 0):
     if type(gc_bounds) != tuple:
         gc_bounds = (0, gc_bounds)

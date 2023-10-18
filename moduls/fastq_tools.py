@@ -1,3 +1,6 @@
+from os import makedirs
+import os.path
+
 def GC_cont_check(sequence_for_filtering: str , gc_bounds: list) -> bool:
     """
     Check the GC content of the sequence for filtering

@@ -1,3 +1,6 @@
+from os import makedirs
+import os.path
+
 def GC_cont_check(sequence_for_filtering: str , gc_bounds: list) -> bool:
     """
     Check the GC content of the sequence for filtering
@@ -47,19 +50,80 @@ def quality_chech (quality_of_sequence_for_filterring: str, quality_threshold: i
         return True
 
 
+def seqs_creation(input_path_input: str) -> dict:
+    """
+    Reading of the input file and creating the dictinary of the seqs
+    with structure
+     {name' : ('sequence', 'comment' 'quality')
+     }
+    :param input_path_input:
+    :return: dictinary of esquenses 
+    """
+
+    path_input = str(input_path_input)
+    inline_new_dit_fasta = {}
+    outline_new_dict_fasta = {}
+    py_file = open (path_input)
+    lines = py_file.readlines()
+    i = 0
+    seq = {}
+    seqs = {}
+    while i != (len(lines)):
+        key = lines[i]
+        key = key[:-1]
+        value_1 = lines[i+1]
+        value_1 = value_1 [:-1]
+        value_3 = lines[i+2]
+        value_3 = value_3[:-1]
+        value_2 = lines[i+3]
+        if value_2[-1] == '\n':
+            value_2 = value_2[:-1]
+        value = [value_1, value_3 ,value_2]
+        seq[key] = value
+        seqs = {**seq}
+        i +=  4
+    return seqs
+
+
+def output_creating (input_path: str, output_filename: str, outline_new_dict_fasta: str):
+    """
+    Create the output file and folder for the file
+    :param input_path: the name of input file for extracting sequenses  
+    :param output_filename:  the name of output file for writing sequenses
+    :param outline_new_dict_fasta: the name of the folder fot the keeping output filename
+    :return: nothing
+    """
+    if output_filename != None:
+        os.makedirs('fastq_filtrator_resuls', exist_ok=True)
+        file_for_output_filename = 'fastq_filtrator_resuls/' + output_filename + '.fastq'
+        with open(file_for_output_filename, mode='w') as f:
+            for key, value in outline_new_dict_fasta.items():
+                f.write(key + '\n')
+                f.write(value[0] + '\n')
+                f.write(value[1] + '\n')
+                f.write(value[2] + '\n')
+    else:
+        os.makedirs('fastq_filtrator_resuls', exist_ok=True)
+        file_for_output_filename = 'fastq_filtrator_resuls/' + input_path
+        with open(file_for_output_filename, mode='w') as f:
+            for key, value in outline_new_dict_fasta.items():
+                f.write(key + '\n')
+                f.write(value[0] + '\n')
+                f.write(value[1] + '\n')
+                f.write(value[2] + '\n')
+
+ 
 def fasta_filtering(seqs, gc_bounds = (0, 100), length_bounds = (0, 2**32), quality_threshold = 0):
     if type(gc_bounds) != tuple:
         gc_bounds = (0, gc_bounds)
     if type(length_bounds) != tuple:
         length_bounds = (0, length_bounds)
-    outline_new_dict_fasta = {}
     inline_new_dit_fasta = {}
     for key, value in seqs.items():
         sequence_for_filtering = value[0]
         quality_of_sequence_for_filterring = value[1]
-        if GC_cont_check(sequence_for_filtering, gc_bounds) == True and lenght_chech(sequence_for_filtering, length_bounds) == True and quality_chech(quality_of_sequence_for_filterring, quality_threshold) == True:
+        if GC_cont_check(sequence_for_filtering, gc_bounds) and lenght_chech(sequence_for_filtering, length_bounds) and quality_chech(quality_of_sequence_for_filterring, quality_threshold):
             inline_new_dit_fasta[key]= value
-    outline_new_dict_fasta = {**inline_new_dit_fasta}
-    return (outline_new_dict_fasta)
+    return (inline_new_dict_fasta)
 
 

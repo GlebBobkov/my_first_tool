@@ -33,7 +33,7 @@ def convert_multiline_fasta_to_oneline(path_input: str, output_fasta = None):
         output_fasta = 'bio_files_processor_results/' + output_fasta + '.fastq'
     else:
         os.makedirs('bio_files_processor_results', exist_ok=True)
-        output_fasta = 'bio_files_processor_results/' + path_input + '.fastq'
+        output_fasta = 'bio_files_processor_results/' + path_input
     with open(output_fasta, mode='w') as f:
         for line in list_for_printing:
             f.write(line + '\n')

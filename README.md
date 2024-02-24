@@ -3,6 +3,7 @@
 - 'dna_rna_tools' - List of procedures: `transcribe` (return the transcribed sequence), `reverse` (return the reversed sequence), `complement` (return the complementary sequence), `reverse_complement` (return the reverse complementary sequence);
 - 'protein_tools'- List of procedures: `length` (return the number of amino acids in protein sequence(s)), `percentage` (return percentage of each amino acid in sequence), `pattern` (return all non-overlaping instances of a given pattern in sequences), `3Letter_name` (return three-letter amino acids into a three-letter amino acids), `DNA_code` ( return transformed protein sequence(s) to DNA sequence(s)), `fastq_tools` (return percentage of each amino acid in sequence);
 - 'fastq_tools' - Procedure: filtering of the dictionary of sequences by the length, quality of sequencing of each nucleotides and GC% content.
+- 'bio_files_processor' - Procedure: converting the multilined fasta to one line fasta 
 
 ## run_dna_rna_tools.py
 > *description of how the run_dna_rna_tools.py program works*
@@ -125,19 +126,22 @@ The result of the running of the tool is sorted dictionary of the dictionary fro
 'length_bounds' - length of the interval for filtering, still gc_bounds, but by default it is (0, 2**32).
 'quality_threshold' - threshold value of average read quality for the filter, default is 0 (phred33 scale). Reads contribute to quality for all nucleotides below the threshold are discarded.
 
+> :warning: Attention: please be careful. currently that program for the input argument takes the namu of analising file only in fastq format. So your agrument shold be like 'example_fastq.fastq'. The and fot the output name write only the name of the file; the prefix .fatsq will be add automaticly. 
+
 **Use example**
 ```python
-seqs =  {
-    # 'name' : ('sequence', 'quality')
-    '@SRX079804:1:SRR292678:1:1101:21885:21885': ('ACAGCAACATAAACATGATGGGATGGCGTAAGCCCCCGAGATATCAGTTTACCCAGGATAAGAGATTAAATTATGAGCAACATTATTAA', 'FGGGFGGGFGGGFGDFGCEBB@CCDFDDFFFFBFFGFGEFDFFFF;D@DD>C@DDGGGDFGDGG?GFGFEGFGGEF@FDGGGFGFBGGD'),
-    '@SRX079804:1:SRR292678:1:1101:24563:24563': ('ATTAGCGAGGAGGAGTGCTGAGAAGATGTCGCCTACGCCGTTGAAATTCCCTTCAATCAGGGGGTACTGGAGGATACGAGTTTGTGTG', 'BFFFFFFFB@B@A<@D>BDDACDDDEBEDEFFFBFFFEFFDFFF=CC@DDFD8FFFFFFF8/+.2,@7<<:?B/:<><-><@.A*C>D'),
-    '@SRX079804:1:SRR292678:1:1101:30161:30161': ('GAACGACAGCAGCTCCTGCATAACCGCGTCCTTCTTCTTTAGCGTTGTGCAAAGCATGTTTTGTATTACGGGCATCTCGAGCGAATC', 'DFFFEGDGGGGFGGEDCCDCEFFFFCCCCCB>CEBFGFBGGG?DE=:6@=>A<A>D?D8DCEE:>EEABE5D@5:DDCA;EEE-DCD'),
-    '@SRX079804:1:SRR292678:1:1101:171075:171075': ('CATTATAGTAATACGGAAGATGACTTGCTGTTATCATTACAGCTCCATCGCATGAATAATTCTCTAATATAGTTGTCAT', 'HGHHHHGFHHHHFHHEHHHHFGEHFGFGGGHHEEGHHEEHBHHFGDDECEGGGEFGF<FGGIIGEBGDFFFGFFGGFGF'),
-    '@SRX079804:1:SRR292678:1:1101:175500:175500': ('GACGCCGTGGCTGCACTATTTGAGGCACCTGTCCTCGAAGGGAAGTTCATCTCGACGCGTGTCACTATGACATGAATG', 'GGGGGFFCFEEEFFDGFBGGGA5DG@5DDCBDDE=GFADDFF5BE49<<<BDD?CE<A<8:59;@C.C9CECBAC=DE'),
-    
-   }
-
-fasta_filtering(seqs) # {'@SRX079804:1:SRR292678:1:1101:21885:21885': ('ACAGCAACATAAACATGATGGGATGGCGTAAGCCCCCGAGATATCAGTTTACCCAGGATAAGAGATTAAATTATGAGCAACATTATTAA', 'FGGGFGGGFGGGFGDFGCEBB@CCDFDDFFFFBFFGFGEFDFFFF;D@DD>C@DDGGGDFGDGG?GFGFEGFGGEF@FDGGGFGFBGGD'), '@SRX079804:1:SRR292678:1:1101:171075:171075': ('CATTATAGTAATACGGAAGATGACTTGCTGTTATCATTACAGCTCCATCGCATGAATAATTCTCTAATATAGTTGTCAT', 'HGHHHHGFHHHHFHHEHHHHFGEHFGFGGGHHEEGHHEEHBHHFGDDECEGGGEFGF<FGGIIGEBGDFFFGFFGGFGF')}
+fasta_filtering('example_fastq.fastq') # will be created the folder with the file inside example_fastq.fastq with filtered sequenses. 
+```
 
 
+
+## bio_files_processor.py
+> *description of how the run_dna_rna_tools.py program works*
+That programm create from the file with multilined sequenses one line form of sequse.
+
+**Use example**
+```python
+convert_multiline_fasta_to_oneline('example_fastq.fastq') # will be created the folder with the file inside example_fastq.fastq with sequenses written in one line istead of multiline in input fils. 
+```
+> :warning: Attention: please be careful. currently that program for the input argument takes the namu of analising file only in fastq format. So your agrument shold be like 'example_fastq.fastq'. The and fot the output name write only the name of the file; the prefix .fatsq will be add automaticly. 
 
